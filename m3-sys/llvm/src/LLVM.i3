@@ -297,6 +297,35 @@ TYPE Visibility = {
   Protected (**< The GV is protected *)
 };
 
+TYPE AtomicOrdering = {
+  LLVMAtomicOrderingNotAtomic, (** 0 < A load or store which is not atomic *)
+  LLVMAtomicOrderingUnordered, (** 1 < Lowest level of atomicity, guarantees
+                                     somewhat sane results, lock free. *)
+
+  LLVMAtomicOrderingMonotonic, (** 2 < guarantees that if you take all the
+                                     operations affecting a specific address,
+                                     a consistent ordering exists *)
+  XXXXX3,  
+  LLVMAtomicOrderingAcquire, (** 4 < Acquire provides a barrier of the sort
+                                   necessary to acquire a lock to access other
+                                   memory with normal loads and stores. *)
+  LLVMAtomicOrderingRelease, (** 5 < Release is similar to Acquire, but with
+                                   a barrier of the sort necessary to release
+                                   a lock. *)
+  LLVMAtomicOrderingAcquireRelease, (** 6 < provides both an Acquire and a
+                                          Release barrier (for fences and
+                                          operations which both read and write
+                                           memory). *)
+  LLVMAtomicOrderingSequentiallyConsistent (** 7 < provides Acquire semantics
+                                                 for loads and Release
+                                                 semantics for stores.
+                                                 Additionally, it guarantees
+                                                 that a total ordering exists
+                                                 between all
+                                                 SequentiallyConsistent
+                                                 operations. *)
+};
+
 CONST
   CCallConv           = 0;
   FastCallConv        = 8;
